@@ -1,0 +1,7 @@
+name: Practice
+author: SmakYop
+version: 1.0-SNAPSHOT
+main: com.spigot.practice.Practice
+commands:
+     setspawn:
+        description: Command for set the spawn location.

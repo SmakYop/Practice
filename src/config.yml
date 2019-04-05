@@ -1,0 +1,38 @@
+########################################################
+#                        Practice                      #
+########################################################
+
+General:
+  Prefix: '&7[&ePractice&7]'
+  ScoreboardName: '&6&lSpigot &7(Practice)'
+  StartPlayerElo: 1400
+
+# Configuration of database (MySQL)
+Database:
+  user: user
+  pass: pass
+  url: url
+  port: 3006
+  database: database
+
+# Locations
+Spawn:
+  world: {}
+  x: {}
+  y: {}
+  z: {}
+
+
+# Arena Configuration
+Arena:
+  first_arena:
+    location:
+      world:
+      x:
+      y:
+      z:
+
+
+########################################################
+#                        Practice                      #
+########################################################
