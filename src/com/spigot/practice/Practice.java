@@ -1,5 +1,6 @@
 package com.spigot.practice;
 
+import com.spigot.practice.arena.ArenaManager;
 import com.spigot.practice.commands.SpawnCommand;
 import com.spigot.practice.listeners.ListenerManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -15,6 +16,8 @@ public class Practice extends JavaPlugin{
 		new ListenerManager(this).registerEvents();
 		saveDefaultConfig();
 		registerCommands();
+
+		ArenaManager.loadDefaultArena();
 	}
 
 	@Override
