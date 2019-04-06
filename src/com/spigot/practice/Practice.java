@@ -17,7 +17,11 @@ public class Practice extends JavaPlugin{
 		saveDefaultConfig();
 		registerCommands();
 
+        log("----------------------------------------");
 		ArenaManager.loadDefaultArena();
+		log("----------------------------------------");
+		ArenaManager.removeArenas();
+        log("----------------------------------------");
 	}
 
 	@Override
