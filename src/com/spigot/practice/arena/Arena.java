@@ -97,5 +97,6 @@ public class Arena {
     public void setSecondPlayerLocation(Location secondPlayerLocation) {
         this.secondPlayerLocation = secondPlayerLocation;
     }
+    
 }
 
