@@ -3,12 +3,12 @@
 ########################################################
 
 General:
-  Prefix: '&7[&ePractice&7]'
-  ScoreboardName: '&6&lSpigot &7(Practice)'
-  StartPlayerElo: 1400
+  prefix: '&7[&ePractice&7]'
+  start_player_elo: 1400
 
 # Configuration of database (MySQL)
 Database:
+  enabled: false
   user: user
   pass: pass
   url: url
@@ -24,14 +24,9 @@ Spawn:
 
 
 # Arena Configuration
+# /!\ Put a default arenas number wich proportional to the performances of your server !
 Arena:
-  first_arena:
-    location:
-      world:
-      x:
-      y:
-      z:
-
+  number_default_arena: 10
 
 ########################################################
 #                        Practice                      #

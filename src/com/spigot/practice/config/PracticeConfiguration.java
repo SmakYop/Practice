@@ -6,31 +6,9 @@ import org.bukkit.Location;
 
 public class PracticeConfiguration {
 
-	private static PracticeConfiguration instance = new PracticeConfiguration();
+	public static String PREFIX = Practice.getInstance().getConfig().getString("General.prefix").replace('&', '§');
+	public static int START_PLAYER_ELO = Practice.getInstance().getConfig().getInt("General.start_player_elo");
+	public static int DEFAULT_ARENA_NUMBER = Practice.getInstance().getConfig().getInt("Arena.number_default_arena");
+	public static Location SPAWN_LOCATION = new Location(Bukkit.getWorld(Practice.getInstance().getConfig().getString("Spawn.world")), Practice.getInstance().getConfig().getDouble("Spawn.x"), Practice.getInstance().getConfig().getDouble("Spawn.y"), Practice.getInstance().getConfig().getDouble("Spawn.z"));
 
-	private String prefix = Practice.getInstance().getConfig().getString("General.Prefix").replace('&', '§');
-	private String scoreboardName = Practice.getInstance().getConfig().getString("General.ScoreboardName").replace('&', '§');
-	private int startPlayerElo = Practice.getInstance().getConfig().getInt("General.StartPlayerElo");
-	private Location spawnLocation = new Location(Bukkit.getWorld(Practice.getInstance().getConfig().getString("Spawn.world")), Practice.getInstance().getConfig().getDouble("Spawn.x"),
-			Practice.getInstance().getConfig().getDouble("Spawn.y"), Practice.getInstance().getConfig().getDouble("Spawn.z"));
-
-	public String getPrefix(){
-		return this.prefix;
-	}
-
-	public String getScoreboardName(){
-		return this.scoreboardName;
-	}
-
-	public int getStartPlayerElo(){
-		return this.startPlayerElo;
-	}
-
-	public Location getSpawnLocation(){
-		return this.spawnLocation;
-	}
-
-	public static PracticeConfiguration getInstance(){
-		return instance;
-	}
 }

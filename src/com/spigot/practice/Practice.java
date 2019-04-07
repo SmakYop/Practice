@@ -1,5 +1,6 @@
 package com.spigot.practice;
 
+import com.spigot.practice.arena.ArenaConfig;
 import com.spigot.practice.arena.ArenaManager;
 import com.spigot.practice.commands.SpawnCommand;
 import com.spigot.practice.listeners.ListenerManager;
@@ -15,13 +16,12 @@ public class Practice extends JavaPlugin{
 
 		new ListenerManager(this).registerEvents();
 		saveDefaultConfig();
+		ArenaConfig.loadArenaConfigFile();
 		registerCommands();
 
         log("----------------------------------------");
 		ArenaManager.loadDefaultArena();
 		log("----------------------------------------");
-		ArenaManager.removeArenas();
-        log("----------------------------------------");
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class Practice extends JavaPlugin{
 	}
 
 	public static void log(String log){
-		instance.getLogger().info(log);
+		instance.getLogger().info("[Practice] "+log);
 	}
 
 	private void registerCommands(){

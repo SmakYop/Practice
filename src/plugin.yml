@@ -2,6 +2,7 @@ name: Practice
 author: SmakYop
 version: 1.0-SNAPSHOT
 main: com.spigot.practice.Practice
+depend: [WorldEdit]
 commands:
      setspawn:
-        description: Command for set the spawn location.
+        description: Command for set the spawn location

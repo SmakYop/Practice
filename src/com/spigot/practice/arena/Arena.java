@@ -3,58 +3,51 @@ package com.spigot.practice.arena;
 import com.spigot.practice.Practice;
 import org.bukkit.Location;
 
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Arena {
 
     private String id;
-    private Location location;
+    private Location arenaLocation;
     private Location firstPlayerLocation;
     private Location secondPlayerLocation;
     private boolean isUsed = false;
+    private boolean isTemporary;
     private ArenaType arenaType;
-    private static Map<String, Arena> arenaList = new HashMap<>();
+    private static HashMap<String, Arena> arenaList = new HashMap<>();
 
-    public Arena(){}
-    public Arena(String arenaId){this.id = arenaId;}
-
-    public static void init(String arenaId){
-        if(get(arenaId) == null) arenaList.put(arenaId, new Arena(arenaId));
+    public Arena(String arenaId, ArenaType arenaType, Location arenaLocation, Location firstPlayerLocation, Location secondPlayerLocation){
+        this.id = arenaId;
+        arenaList.put(this.id, this);
+        this.arenaType = arenaType;
+        this.arenaLocation = arenaLocation;
+        this.firstPlayerLocation = firstPlayerLocation;
+        this.secondPlayerLocation = secondPlayerLocation;
     }
 
     public static Arena get(String arenaId){
         return arenaList.get(arenaId);
     }
 
-    public static Collection<? extends Arena> getAllArenas(){
-        return arenaList.values();
+    public void createArena(){
+        ArenaConfig.saveArena(this.id);
+        Practice.log("Arena created | Id: " + this.id + " | ArenaType: " + arenaType);
+        // setLocation(Iterables.getLast(arenaList.values()).getLocation().clone().add(100,0,0));
+        // paste worldedit en fonction du type
     }
 
-    public void createArena(String arenaId, ArenaType arenaType){
-        int arenaNumber = arenaList.size()+1;
-        this.id = "#" + arenaNumber;
-        this.arenaType = arenaType;
-        init(arenaId);
-
-        // setLocation = error
-        //setLocation(Iterables.getLast(arenaList.values()).getLocation().clone().add(100,0,0));
-        Practice.log("Arena created | Id: " + arenaId + " | ArenaType: " + arenaType);
-    }
-
-    public Arena remove(){
+    public void remove(){
+        arenaList.remove(this.id);
         Practice.log("Arena removed | Id: " + this.id);
-        return arenaList.remove(this.id);
-       /* cut map with worldedit */
+       // cut map with worldedit
     }
 
     public String getId() {
         return id;
     }
 
-    public Location getLocation() {
-        return location;
+    public Location getArenaLocation() {
+        return arenaLocation;
     }
 
     public ArenaType getArenaType() {
@@ -69,20 +62,28 @@ public class Arena {
         return secondPlayerLocation;
     }
 
+    public static HashMap<String, Arena> getArenaList(){
+        return arenaList;
+    }
+
     public boolean isUsed() {
         return isUsed;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public boolean isTemporary() {
+        return isTemporary;
     }
 
     public void setLocation(Location location) {
-        this.location = location;
+        this.arenaLocation = location;
     }
 
     public void setUsed(boolean used) {
         isUsed = used;
+    }
+
+    public void setTemporary(boolean temporary) {
+        isTemporary = temporary;
     }
 
     public void setArenaType(ArenaType arenaType) {

@@ -11,8 +11,7 @@ public class PracticePlayer {
 	private Player player;
 	private String name;
 	private UUID uuid;
-	private boolean inFight = false;
-	private int ping;
+	private boolean inFight;
 	private int globalElo;
 
 	private static Map<Player, PracticePlayer> practicePlayers = new HashMap<>();
@@ -22,11 +21,7 @@ public class PracticePlayer {
 		this.name = paramPlayer.getName();
 		this.uuid = paramPlayer.getUniqueId();
 		this.inFight = false;
-	}
-
-	public static void init(Player paramPlayer){
-		if(get(paramPlayer) == null)
-			practicePlayers.put(paramPlayer, new PracticePlayer(paramPlayer));
+		practicePlayers.put(paramPlayer, this);
 	}
 
 	public static PracticePlayer get(Player paramPlayer){
@@ -41,7 +36,7 @@ public class PracticePlayer {
 		return this.name;
 	}
 
-	public UUID getUuid(){
+	public UUID getUUID(){
 		return this.uuid;
 	}
 
