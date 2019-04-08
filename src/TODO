@@ -4,3 +4,11 @@ practice.setspawn (définir le point de spawn)
 
 --------------------
 Moderation system (can enable/disable)
+--------------------
+MatchType :
+-NoDebuff
+-Debuff
+-BuildUHC
+-Combo
+-Gapple
+-NoEnchant

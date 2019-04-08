@@ -1,6 +1,7 @@
-package com.spigot.practice.arena;
+package com.spigot.practice.config;
 
 import com.spigot.practice.Practice;
+import com.spigot.practice.arena.Arena;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -35,10 +36,19 @@ public class ArenaConfig {
             fileConfiguration.set("arena." + arenaId + ".second_player_location.x", arena.getSecondPlayerLocation().getBlockX());
             fileConfiguration.set("arena." + arenaId + ".second_player_location.y", arena.getSecondPlayerLocation().getBlockY());
             fileConfiguration.set("arena." + arenaId + ".second_player_location.z", arena.getSecondPlayerLocation().getBlockZ());
-            fileConfiguration.set("arena." + arenaId + ".arena_type", arena.getArenaType().getArenaName());
             fileConfiguration.set("arena." + arenaId + ".temporary", arena.isTemporary());
             fileConfiguration.save(arenaFile);
             Practice.log("Arena " + arenaId + " saved in arena.yml");
+        }catch (IOException e){
+            return;
+        }
+    }
+
+    public static void removeArena(String arenaId){
+        try{
+            FileConfiguration fileConfiguration = YamlConfiguration.loadConfiguration(arenaFile);
+            fileConfiguration.set("arena." + arenaId, null);
+            fileConfiguration.save(arenaFile);
         }catch (IOException e){
             return;
         }

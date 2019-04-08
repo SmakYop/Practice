@@ -17,6 +17,6 @@ public class PlayerConnection implements Listener{
 		player.setLevel(0);
 		player.setExp(0);
 		player.setFoodLevel(20);
-		//player.teleport(PracticeConfiguration.SPAWN_LOCATION);
+		//player.teleport(PracticeConfig.SPAWN_LOCATION);
 	}
 }

@@ -6,3 +6,7 @@ depend: [WorldEdit]
 commands:
      setspawn:
         description: Command for set the spawn location
+     arena:
+     party:
+       description: Command to manage your party
+     match:

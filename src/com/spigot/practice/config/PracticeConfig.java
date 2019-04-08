@@ -4,7 +4,7 @@ import com.spigot.practice.Practice;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
-public class PracticeConfiguration {
+public class PracticeConfig {
 
 	public static String PREFIX = Practice.getInstance().getConfig().getString("General.prefix").replace('&', '§');
 	public static int START_PLAYER_ELO = Practice.getInstance().getConfig().getInt("General.start_player_elo");

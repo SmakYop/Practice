@@ -1,6 +1,7 @@
 package com.spigot.practice.arena;
 
 import com.spigot.practice.Practice;
+import com.spigot.practice.config.ArenaConfig;
 import org.bukkit.Location;
 
 import java.util.HashMap;
@@ -8,19 +9,15 @@ import java.util.HashMap;
 public class Arena {
 
     private String id;
-    private Location arenaLocation;
     private Location firstPlayerLocation;
     private Location secondPlayerLocation;
     private boolean isUsed = false;
     private boolean isTemporary;
-    private ArenaType arenaType;
     private static HashMap<String, Arena> arenaList = new HashMap<>();
 
-    public Arena(String arenaId, ArenaType arenaType, Location arenaLocation, Location firstPlayerLocation, Location secondPlayerLocation){
+    public Arena(String arenaId, Location firstPlayerLocation, Location secondPlayerLocation){
         this.id = arenaId;
         arenaList.put(this.id, this);
-        this.arenaType = arenaType;
-        this.arenaLocation = arenaLocation;
         this.firstPlayerLocation = firstPlayerLocation;
         this.secondPlayerLocation = secondPlayerLocation;
     }
@@ -31,7 +28,7 @@ public class Arena {
 
     public void createArena(){
         ArenaConfig.saveArena(this.id);
-        Practice.log("Arena created | Id: " + this.id + " | ArenaType: " + arenaType);
+        Practice.log("Arena created | Id: " + this.id);
         // setLocation(Iterables.getLast(arenaList.values()).getLocation().clone().add(100,0,0));
         // paste worldedit en fonction du type
     }
@@ -44,14 +41,6 @@ public class Arena {
 
     public String getId() {
         return id;
-    }
-
-    public Location getArenaLocation() {
-        return arenaLocation;
-    }
-
-    public ArenaType getArenaType() {
-        return arenaType;
     }
 
     public Location getFirstPlayerLocation() {
@@ -74,20 +63,8 @@ public class Arena {
         return isTemporary;
     }
 
-    public void setLocation(Location location) {
-        this.arenaLocation = location;
-    }
-
     public void setUsed(boolean used) {
         isUsed = used;
-    }
-
-    public void setTemporary(boolean temporary) {
-        isTemporary = temporary;
-    }
-
-    public void setArenaType(ArenaType arenaType) {
-        this.arenaType = arenaType;
     }
 
     public void setFirstPlayerLocation(Location firstPlayerLocation) {
