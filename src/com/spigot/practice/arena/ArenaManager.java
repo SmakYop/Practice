@@ -1,6 +1,5 @@
 package com.spigot.practice.arena;
 
-import com.spigot.practice.Practice;
 import com.spigot.practice.config.ArenaConfig;
 import com.spigot.practice.config.PracticeConfig;
 import org.bukkit.Bukkit;
@@ -19,12 +18,5 @@ public class ArenaManager {
                 defaultArena.createArena();
             }
         }
-    }
-
-    public static void removeArenas(){
-        Arena.getArenaList().clear();
-        Practice.log("Arena removed");
-        //cut worldedit
-        //remove config
     }
 }

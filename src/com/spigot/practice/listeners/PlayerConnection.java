@@ -11,12 +11,14 @@ public class PlayerConnection implements Listener{
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event){
 		Player player = event.getPlayer();
-		new PracticePlayer(player);
+		PracticePlayer practicePlayer = new PracticePlayer(player);
 
 		player.setHealth(20);
 		player.setLevel(0);
 		player.setExp(0);
 		player.setFoodLevel(20);
 		//player.teleport(PracticeConfig.SPAWN_LOCATION);
+
+		practicePlayer.sendLobbyItems();
 	}
 }

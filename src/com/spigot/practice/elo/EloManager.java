@@ -10,12 +10,13 @@ public class EloManager {
     }
 
     public void updateElo(PracticePlayer playerWinner, PracticePlayer playerLooser, GameType gameType){
-        int ratio = playerLooser.getElo(gameType) / playerWinner.getElo(gameType);
-        playerWinner.addElo(gameType, (int)fonction(ratio));
-        playerLooser.removeElo(gameType, (int)fonction(ratio));
+        double ratio = playerLooser.getElo(gameType) / playerWinner.getElo(gameType);
+        playerWinner.addElo(gameType, f(ratio));
+        playerLooser.removeElo(gameType, f(ratio));
+        //sendMessage
     }
 
-    private double fonction(int x){
-        return 6.5 * Math.exp(x);
+    private int f(double x){
+        return (int)(36.78/(1+71.46*Math.exp(-3.68*x)));
     }
 }

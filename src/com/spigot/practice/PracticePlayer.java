@@ -1,7 +1,9 @@
 package com.spigot.practice;
 
 import com.spigot.practice.config.PlayerConfig;
+import com.spigot.practice.inventory.ItemsManager;
 import com.spigot.practice.match.GameType;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -13,6 +15,7 @@ public class PracticePlayer {
 	private String name;
 	private UUID uuid;
 	private boolean inFight;
+	private boolean inQueue;
 	private boolean isSpectator;
 	private boolean hasParty;
 	private int globalElo;
@@ -26,6 +29,7 @@ public class PracticePlayer {
 		this.name = paramPlayer.getName();
 		this.uuid = paramPlayer.getUniqueId();
 		this.inFight = false;
+		this.inQueue = false;
 		this.globalElo = PlayerConfig.getGlobalElo(paramPlayer);
 		practicePlayers.put(paramPlayer, this);
 
@@ -61,18 +65,25 @@ public class PracticePlayer {
 		return this.inFight;
 	}
 
+	public boolean isInQueue() {
+		return inQueue;
+	}
+
 	public boolean isSpectator() {
 		return isSpectator;
 	}
 
-	public void setFight(boolean inFight){
+	public void setInFight(boolean inFight){
 		this.inFight = inFight;
+	}
+
+	public void setInQueue(boolean inQueue) {
+		this.inQueue = inQueue;
 	}
 
 	public void setSpectator(boolean spectator) {
 		isSpectator = spectator;
 	}
-
 
 	public int getElo(GameType gameType){
 		return eloByMatchType.get(gameType);
@@ -84,5 +95,13 @@ public class PracticePlayer {
 
 	public void removeElo(GameType gameType, int elo){
 		eloByMatchType.put(gameType, eloByMatchType.get(gameType)-elo);
+	}
+
+	public void sendLobbyItems(){
+		ItemsManager unranked = new ItemsManager(Material.IRON_SWORD, "§eUnranked", new String[]{"§7Right-click to play unranked matches"});
+		ItemsManager ranked = new ItemsManager(Material.DIAMOND_SWORD, "§eRanked", new String[]{"§7Right-click to play ranked matches"});
+
+		this.player.getInventory().setItem(0, unranked.toItemStack());
+		this.player.getInventory().setItem(1, ranked.toItemStack());
 	}
 }

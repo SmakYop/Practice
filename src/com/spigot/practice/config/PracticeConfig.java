@@ -11,4 +11,11 @@ public class PracticeConfig {
 	public static int DEFAULT_ARENA_NUMBER = Practice.getInstance().getConfig().getInt("Arena.number_default_arena");
 	public static Location SPAWN_LOCATION = new Location(Bukkit.getWorld(Practice.getInstance().getConfig().getString("Spawn.world")), Practice.getInstance().getConfig().getDouble("Spawn.x"), Practice.getInstance().getConfig().getDouble("Spawn.y"), Practice.getInstance().getConfig().getDouble("Spawn.z"));
 
+	// Messages Configuration
+	public static String ADDED_QUEUE = "";
+
+	// Inventory Configuration
+	public static String UNRANKED_TITLE = "§eUnranked Matches";
+	public static String RANKED_TITLE = "§eRanked Matches";
+
 }

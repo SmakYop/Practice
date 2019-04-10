@@ -15,6 +15,7 @@ public class ListenerManager {
 	public void registerEvents() {
 		PluginManager pluginManager = Bukkit.getPluginManager();
 		pluginManager.registerEvents(new PlayerConnection(), plugin);
+		pluginManager.registerEvents(new PlayerInteract(), plugin);
 
 	}
 

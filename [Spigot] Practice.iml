@@ -9,5 +9,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="spigot-1.7.10-SNAPSHOT-b1657" level="project" />
     <orderEntry type="library" name="worldedit-bukkit-6.1.7.3" level="project" />
+    <orderEntry type="library" name="SmartInvs-1.2.7" level="project" />
   </component>
 </module>

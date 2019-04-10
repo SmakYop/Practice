@@ -36,7 +36,7 @@ public class MatchCommand implements CommandExecutor{
             PracticePlayer firstPracticePlayer = PracticePlayer.get(firstPlayer);
             PracticePlayer secondPracticePlayer = PracticePlayer.get(secondPlayer);
 
-            Arena arena = new Arena("#"+(Arena.getArenaList().size()+1), ArenaType.DEFAULT, new Location(Bukkit.getWorld("world"),0,0,0),new Location(Bukkit.getWorld("world"),0,0,0),new Location(Bukkit.getWorld("world"),0,0,0));
+            Arena arena = new Arena("#"+(Arena.getArenaList().size()+1),new Location(Bukkit.getWorld("world"),0,0,0),new Location(Bukkit.getWorld("world"),0,0,0));
             arena.createArena();
             Match match = new Match(firstPracticePlayer, secondPracticePlayer, arena, GameType.NO_DEBUFF, Ranking.UNRANKED);
             match.createMatch();

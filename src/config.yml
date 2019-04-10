@@ -4,7 +4,7 @@
 
 General:
   prefix: '&7[&ePractice&7]'
-  start_player_elo: 1400
+  start_player_elo: 1000
 
 # Configuration of database (MySQL)
 Database:

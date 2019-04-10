@@ -24,10 +24,6 @@ public class ArenaConfig {
         Arena arena = Arena.get(arenaId);
         try {
             FileConfiguration fileConfiguration = YamlConfiguration.loadConfiguration(arenaFile);
-            fileConfiguration.set("arena." + arenaId + ".arena_location.world", arena.getArenaLocation().getWorld().getName());
-            fileConfiguration.set("arena." + arenaId + ".arena_location.x", arena.getArenaLocation().getBlockX());
-            fileConfiguration.set("arena." + arenaId + ".arena_location.y", arena.getArenaLocation().getBlockY());
-            fileConfiguration.set("arena." + arenaId + ".arena_location.z", arena.getArenaLocation().getBlockZ());
             fileConfiguration.set("arena." + arenaId + ".first_player_location.world", arena.getFirstPlayerLocation().getWorld().getName());
             fileConfiguration.set("arena." + arenaId + ".first_player_location.x", arena.getFirstPlayerLocation().getBlockX());
             fileConfiguration.set("arena." + arenaId + ".first_player_location.y", arena.getFirstPlayerLocation().getBlockY());

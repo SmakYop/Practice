@@ -23,8 +23,10 @@ public class Match {
 
     public void createMatch(){
         Practice.log("Creating match... Arena: " + arena.getId() + " | GameType: " + gameType.getTypeName() + " | Ranking: " + ranking.getRankingName());
-        this.firstPlayer.getPlayer().sendMessage(PracticeConfig.PREFIX+" §7Match found | §e" + gameType.getTypeName() + " §7| §e" + ranking.getRankingName());
-        this.secondPlayer.getPlayer().sendMessage(PracticeConfig.PREFIX+" §7Match found | §e" + gameType.getTypeName() + " §7| §e" + ranking.getRankingName());
+        this.firstPlayer.getPlayer().sendMessage(PracticeConfig.PREFIX+" §7Match found | §6" + gameType.getTypeName() + " §7| §6" + ranking.getRankingName());
+        this.firstPlayer.getPlayer().sendMessage(PracticeConfig.PREFIX+" §7Opponent: §c" + this.secondPlayer.getPlayer().getName());
+        this.secondPlayer.getPlayer().sendMessage(PracticeConfig.PREFIX+" §7Match found | §6" + gameType.getTypeName() + " §7| §6" + ranking.getRankingName());
+        this.secondPlayer.getPlayer().sendMessage(PracticeConfig.PREFIX+" §7Opponent: §c" + this.firstPlayer.getPlayer().getName());
 
         startMatch();
     }
