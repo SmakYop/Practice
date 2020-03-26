@@ -8,6 +8,9 @@ import com.spigot.practice.config.ArenaConfig;
 import com.spigot.practice.commands.SpawnCommand;
 import com.spigot.practice.config.PlayerConfig;
 import com.spigot.practice.listeners.ListenerManager;
+import com.spigot.practice.match.Ladder;
+import com.spigot.practice.queue.RankedQueue;
+import com.spigot.practice.queue.UnrankedQueue;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -23,17 +26,23 @@ public class Practice extends JavaPlugin{
 		instance = this;
 		arenaConfig = new ArenaConfig();
 		arenaManager = new ArenaManager();
+
 		worldEditPlugin = (WorldEditPlugin) Bukkit.getServer().getPluginManager().getPlugin("WorldEdit");
 
 		this.arenaManager.createArenaWorld();
 		this.arenaConfig.loadArenaConfigFile();
+		this.arenaManager.loadDefaultArena();
+
 		saveDefaultConfig();
 		registerCommands();
 		PlayerConfig.loadPlayersFile();
 		new ListenerManager(this).registerEvents();
 
-		log(arenaManager.getArenasNumber() + " arenas registred.");
-		this.arenaManager.loadDefaultArena();
+		for(Ladder ladder : Ladder.values()) {
+			new UnrankedQueue(ladder);
+			new RankedQueue(ladder);
+		}
+
 	}
 
 	@Override

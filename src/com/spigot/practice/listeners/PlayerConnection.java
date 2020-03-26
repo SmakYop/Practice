@@ -20,5 +20,6 @@ public class PlayerConnection implements Listener{
 		//player.teleport(PracticeConfig.SPAWN_LOCATION);
 
 		practicePlayer.sendLobbyItems();
+		practicePlayer.sendLobbyScoreboard();
 	}
 }

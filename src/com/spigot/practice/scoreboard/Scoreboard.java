@@ -35,10 +35,6 @@ public class Scoreboard {
 		this.teams = Lists.newArrayList();
 	}
 
-	public void blankLine() {
-		add("§7§m                                  ");
-	}
-
 	public void add(String text) {
 		add(text, null);
 	}

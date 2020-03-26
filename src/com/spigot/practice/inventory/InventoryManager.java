@@ -1,6 +1,5 @@
 package com.spigot.practice.inventory;
 
-import com.spigot.practice.Practice;
 import com.spigot.practice.config.PracticeConfig;
 import fr.minuskube.inv.SmartInventory;
 import org.bukkit.entity.Player;

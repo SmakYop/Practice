@@ -78,9 +78,9 @@ public class ArenaManager {
         }
     }
 
-    public Arena selectRandomPlayableArena(){
+    public Arena selectRandomPlayableArena(boolean build){
         for(Arena arenas : Arena.getArenaList().values()){
-            if(!arenas.isUsed()) return arenas;
+            if(!arenas.isUsed() && arenas.canBuild() == build) return arenas;
         }
         return null;
     }

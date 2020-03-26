@@ -3,22 +3,25 @@ package com.spigot.practice;
 import com.spigot.practice.config.PlayerConfig;
 import com.spigot.practice.inventory.ItemsManager;
 import com.spigot.practice.match.Ladder;
+import com.spigot.practice.match.Match;
+import com.spigot.practice.queue.Queue;
+import com.spigot.practice.scoreboard.Scoreboard;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
-import java.util.UUID;
 
 public class PracticePlayer {
 
 	private Player player;
-	private String name;
-	private UUID uuid;
 	private boolean inFight;
 	private boolean inQueue;
 	private boolean isSpectator;
 	private boolean hasParty;
 	private int globalElo;
+	private Queue queue;
+	private Scoreboard scoreboard;
+	private Match match;
 
 	private static HashMap<Player, PracticePlayer> practicePlayers = new HashMap<>();
 	private static HashMap<Ladder, Integer> eloByMatchType = new HashMap<>();
@@ -26,10 +29,10 @@ public class PracticePlayer {
 	public PracticePlayer(Player paramPlayer){
 		if(!PlayerConfig.exists(paramPlayer)) PlayerConfig.registerPlayer(paramPlayer);
 		this.player = paramPlayer;
-		this.name = paramPlayer.getName();
-		this.uuid = paramPlayer.getUniqueId();
 		this.inFight = false;
 		this.inQueue = false;
+		this.queue = null;
+		this.match = null;
 		this.globalElo = PlayerConfig.getGlobalElo(paramPlayer);
 		practicePlayers.put(paramPlayer, this);
 
@@ -49,16 +52,16 @@ public class PracticePlayer {
 		return this.player;
 	}
 
-	public String getName(){
-		return this.name;
-	}
-
-	public UUID getUUID(){
-		return this.uuid;
-	}
-
 	public int getGlobalElo(){
 		return this.globalElo;
+	}
+
+	public Queue getQueue() {
+		return queue;
+	}
+
+	public Match getMatch() {
+		return match;
 	}
 
 	public boolean isInFight(){
@@ -73,16 +76,28 @@ public class PracticePlayer {
 		return isSpectator;
 	}
 
-	public void setInFight(boolean inFight){
-		this.inFight = inFight;
-	}
-
-	public void setInQueue(boolean inQueue) {
-		this.inQueue = inQueue;
-	}
-
 	public void setSpectator(boolean spectator) {
 		isSpectator = spectator;
+	}
+
+	public void setQueue(Queue queue){
+		this.inQueue = true;
+		this.queue = queue;
+	}
+
+	public void removeQueue(){
+		this.inQueue = false;
+		this.queue = null;
+	}
+
+	public void setMatch(Match match){
+		this.inFight = true;
+		this.match = match;
+	}
+
+	public void removeMatch(){
+		this.inFight = false;
+		this.match = null;
 	}
 
 	public int getElo(Ladder ladder){
@@ -104,4 +119,38 @@ public class PracticePlayer {
 		this.player.getInventory().setItem(0, unranked.toItemStack());
 		this.player.getInventory().setItem(1, ranked.toItemStack());
 	}
+
+	public void sendLobbyScoreboard(){
+		scoreboard = new Scoreboard(" §6§lPRACTICE Spigot ");
+		scoreboard.add(" ", 8);
+		scoreboard.add("§7Global Elo: §e" + this.globalElo, 7);
+		scoreboard.add("  ", 6);
+		scoreboard.add("§7In party: §c✖", 5);
+		scoreboard.add("§7In queue: " + getQueueString(), 4);
+		scoreboard.add("   ", 3);
+		scoreboard.add("§7Name: §e" + this.player.getName(), 2);
+		scoreboard.add("", 1);
+		scoreboard.add("§6mc.practice-server.net", 0);
+		scoreboard.build();
+		scoreboard.send(this.player);
+	}
+
+	public void sendDuelScoreboard(){
+		scoreboard = new Scoreboard(" §6§lPRACTICE Spigot ");
+		scoreboard.add(" ", 7);
+		scoreboard.add("§7Opponent: §e" + match.getOpponent(this).getPlayer().getName(), 6);
+		scoreboard.add("  ", 5);
+		scoreboard.add("§7Ladder: §e" + match.getLadder().getName(), 4);
+		scoreboard.add("§7Ranking: §e" + match.getRanking().getName(), 3);
+		scoreboard.add("§7Arena: §6" + match.getArena().getName() + " §7(ID: #" + match.getArena().getId() + ")", 2);
+		scoreboard.add("", 1);
+		scoreboard.add("§6mc.practice-server.net", 0);
+		scoreboard.build();
+		scoreboard.send(this.player);
+	}
+
+	private String getQueueString(){
+	    if(!inQueue) return "§c✖";
+        return queue.getLadder().getName();
+    }
 }

@@ -1,6 +1,5 @@
 package com.spigot.practice.match;
 
-import com.spigot.practice.Practice;
 import com.spigot.practice.PracticePlayer;
 import com.spigot.practice.arena.Arena;
 import com.spigot.practice.config.PracticeConfig;
@@ -22,10 +21,10 @@ public class Match {
     }
 
     public void createMatch(){
-        Practice.log("Creating match... Arena: #" + arena.getId() + " | Ladder: " + ladder.getTypeName() + " | Ranking: " + ranking.getRankingName());
-        this.firstPlayer.getPlayer().sendMessage(PracticeConfig.PREFIX+" §7Match found | §6" + ladder.getTypeName() + " §7| §6" + ranking.getRankingName());
+        this.arena.setUsed(true);
+
+        broadcastMessage(PracticeConfig.PREFIX+" §7Match found | §6" + ladder.getName() + " §7| §6" + ranking.getName());
         this.firstPlayer.getPlayer().sendMessage(PracticeConfig.PREFIX+" §7Opponent: §c" + this.secondPlayer.getPlayer().getName());
-        this.secondPlayer.getPlayer().sendMessage(PracticeConfig.PREFIX+" §7Match found | §6" + ladder.getTypeName() + " §7| §6" + ranking.getRankingName());
         this.secondPlayer.getPlayer().sendMessage(PracticeConfig.PREFIX+" §7Opponent: §c" + this.firstPlayer.getPlayer().getName());
 
         this.firstPlayer.getPlayer().teleport(this.arena.getFirstPlayerLocation());
@@ -34,7 +33,10 @@ public class Match {
     }
 
     private void startMatch(){
-
+        broadcastMessage(PracticeConfig.PREFIX + " §eArena: §c" + this.arena.getName() + " §7(ID: #" + this.arena.getId() + ")");
+        broadcastMessage(PracticeConfig.PREFIX + " §eYour duel is going to start in §c10 §eseconds...");
+        this.firstPlayer.getPlayer().getInventory().clear();
+        this.secondPlayer.getPlayer().getInventory().clear();
     }
 
     public void finishMatch(){
@@ -64,4 +66,15 @@ public class Match {
     public Ranking getRanking() {
         return ranking;
     }
+
+    public void broadcastMessage(String message){
+        this.firstPlayer.getPlayer().sendMessage(message);
+        this.secondPlayer.getPlayer().sendMessage(message);
+    }
+
+    public PracticePlayer getOpponent(PracticePlayer practicePlayer){
+        return practicePlayer.equals(firstPlayer) ? secondPlayer : firstPlayer;
+    }
+
+
 }

@@ -2,25 +2,26 @@ package com.spigot.practice.match;
 
 public enum Ladder {
 
-    DEBUFF("Debuff", "Pots"),
-    NO_DEBUFF("NoDebuff", "Pots"),
-    BUILDUHC("BuildUHC", "Build"),
-    COMBO("Combo", "Pots"),
-    GAPPLE("Gapple", "Pots"),
-    NO_ENCHANT("NoEnchant", "Pots");
+    DEBUFF("Debuff", false),
+    NO_DEBUFF("NoDebuff", false),
+    BUILDUHC("BuildUHC", true),
+    COMBO("Combo", false),
+    GAPPLE("Gapple", false),
+    NO_ENCHANT("NoEnchant", false);
 
-    private String typeName;
-    private String arenaType;
+    private String name;
+    private boolean build;
 
-    Ladder(String typeName, String arenaType){
-        this.typeName = typeName;
+    Ladder(String name, boolean build){
+        this.name = name;
+        this.build = build;
     }
 
-    public String getTypeName() {
-        return typeName;
+    public String getName() {
+        return name;
     }
 
-    public String getArenaType() {
-        return arenaType;
+    public boolean canBuild() {
+        return build;
     }
 }

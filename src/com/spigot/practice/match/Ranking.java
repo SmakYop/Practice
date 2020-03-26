@@ -5,13 +5,13 @@ public enum Ranking {
     UNRANKED("Unranked"),
     RANKED("Ranked");
 
-    private String rankingName;
+    private String name;
 
-    Ranking(String rankingName){
-        this.rankingName = rankingName;
+    Ranking(String name){
+        this.name = name;
     }
 
-    public String getRankingName() {
-        return rankingName;
+    public String getName() {
+        return name;
     }
 }
