@@ -1,7 +1,10 @@
 package com.spigot.practice.queue;
 
+import com.spigot.practice.Practice;
 import com.spigot.practice.PracticePlayer;
-import com.spigot.practice.match.GameType;
+import com.spigot.practice.arena.Arena;
+import com.spigot.practice.match.Ladder;
+import com.spigot.practice.match.Match;
 import com.spigot.practice.match.Ranking;
 
 import java.util.ArrayList;
@@ -9,44 +12,40 @@ import java.util.HashMap;
 
 public class Queue {
 
-    private GameType gameType;
+    private Ladder ladder;
     private Ranking ranking;
 
-    private static HashMap<PracticePlayer, GameType> unrankedQueuePlayers = new HashMap<>();
-    private static HashMap<PracticePlayer, GameType> rankedQueuePlayers = new HashMap<>();
+    private static HashMap<PracticePlayer, Ladder> unrankedQueuePlayers = new HashMap<>();
+    private static HashMap<PracticePlayer, Ladder> rankedQueuePlayers = new HashMap<>();
 
-    public Queue(GameType gameType) {
-        this.gameType = gameType;
+    public Queue(Ladder ladder) {
+        this.ladder = ladder;
     }
 
-    public HashMap<PracticePlayer, GameType> getUnrankedQueuePlayers(){
+    public HashMap<PracticePlayer, Ladder> getUnrankedQueuePlayers(){
         return unrankedQueuePlayers;
     }
 
-    public HashMap<PracticePlayer, GameType> getRankedQueuePlayers(){
+    public HashMap<PracticePlayer, Ladder> getRankedQueuePlayers(){
         return rankedQueuePlayers;
     }
 
     public void addPlayer(PracticePlayer practicePlayer){
         if(this.ranking == Ranking.UNRANKED) {
-            unrankedQueuePlayers.put(practicePlayer, this.gameType);
-            practicePlayer.getPlayer().sendMessage("§eSuccessfully added to the queue! Mode: §6" + this.gameType.getTypeName() + " §e| §6" + this.ranking.getRankingName());
-            practicePlayer.getPlayer().sendMessage("Queue size:" + unrankedQueuePlayers.size());
+            unrankedQueuePlayers.put(practicePlayer, this.ladder);
+            practicePlayer.getPlayer().sendMessage("§eSuccessfully added to the queue! Mode: §6" + this.ladder.getTypeName() + " §e| §6" + this.ranking.getRankingName());
 
-            //Check number of players
             if(unrankedQueuePlayers.size() == 2) startMatch(this.ranking);
 
         }else if(this.ranking == Ranking.RANKED){
-            rankedQueuePlayers.put(practicePlayer, this.gameType);
-            practicePlayer.getPlayer().sendMessage("§eSuccessfully added to the queue! Mode: §6" + this.gameType.getTypeName() + " §e| §6" + this.ranking.getRankingName());
-            practicePlayer.getPlayer().sendMessage("Queue size:" + rankedQueuePlayers.size());
+            rankedQueuePlayers.put(practicePlayer, this.ladder);
+            practicePlayer.getPlayer().sendMessage("§eSuccessfully added to the queue! Mode: §6" + this.ladder.getTypeName() + " §e| §6" + this.ranking.getRankingName());
 
-            //Check number of players
             if(rankedQueuePlayers.size() == 2) startMatch(this.ranking);
         }
     }
 
-    public void removePlayer(PracticePlayer practicePlayer){
+    private void removePlayer(PracticePlayer practicePlayer){
         if(this.ranking == Ranking.UNRANKED) unrankedQueuePlayers.remove(practicePlayer);
         else if(this.ranking == Ranking.RANKED) rankedQueuePlayers.remove(practicePlayer);
     }
@@ -57,11 +56,8 @@ public class Queue {
             PracticePlayer firstPlayer = list.get(0);
             PracticePlayer secondPlayer = list.get(1);
 
-            /**Arena arena = new Arena("#"+(Arena.getArenaList().size()+1),new Location(Bukkit.getWorld("world"),0,0,0),new Location(Bukkit.getWorld("world"),0,0,0));
-            arena.createArena();
-
-            Match match = new Match(firstPlayer, secondPlayer, arena, this.gameType, Ranking.UNRANKED);
-            match.createMatch();**/
+            Match match = new Match(firstPlayer, secondPlayer, Practice.getInstance().getArenaManager().selectRandomPlayableArena(), this.ladder, Ranking.UNRANKED);
+            match.createMatch();
 
             removePlayer(firstPlayer);
             removePlayer(secondPlayer);
@@ -76,7 +72,7 @@ public class Queue {
             /**Arena arena = new Arena("#"+(Arena.getArenaList().size()+1),new Location(Bukkit.getWorld("world"),0,0,0),new Location(Bukkit.getWorld("world"),0,0,0));
             arena.createArena();
 
-            Match match = new Match(firstPlayer, secondPlayer, arena, this.gameType, Ranking.RANKED);
+            Match match = new Match(firstPlayer, secondPlayer, arena, this.ladder, Ranking.RANKED);
             match.createMatch();**/
 
             removePlayer(firstPlayer);
@@ -84,8 +80,8 @@ public class Queue {
         }
     }
 
-    public GameType getGameType() {
-        return gameType;
+    public Ladder getLadder() {
+        return ladder;
     }
 
     public Ranking getRanking() {

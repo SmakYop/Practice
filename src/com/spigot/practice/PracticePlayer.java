@@ -2,7 +2,7 @@ package com.spigot.practice;
 
 import com.spigot.practice.config.PlayerConfig;
 import com.spigot.practice.inventory.ItemsManager;
-import com.spigot.practice.match.GameType;
+import com.spigot.practice.match.Ladder;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -21,7 +21,7 @@ public class PracticePlayer {
 	private int globalElo;
 
 	private static HashMap<Player, PracticePlayer> practicePlayers = new HashMap<>();
-	private static HashMap<GameType, Integer> eloByMatchType = new HashMap<>();
+	private static HashMap<Ladder, Integer> eloByMatchType = new HashMap<>();
 
 	public PracticePlayer(Player paramPlayer){
 		if(!PlayerConfig.exists(paramPlayer)) PlayerConfig.registerPlayer(paramPlayer);
@@ -33,12 +33,12 @@ public class PracticePlayer {
 		this.globalElo = PlayerConfig.getGlobalElo(paramPlayer);
 		practicePlayers.put(paramPlayer, this);
 
-		eloByMatchType.put(GameType.DEBUFF, PlayerConfig.getDebuffElo(paramPlayer));
-		eloByMatchType.put(GameType.NO_DEBUFF, PlayerConfig.getNoDebuffElo(paramPlayer));
-		eloByMatchType.put(GameType.BUILDUHC, PlayerConfig.getBuildUhcElo(paramPlayer));
-		eloByMatchType.put(GameType.COMBO, PlayerConfig.getComboElo(paramPlayer));
-		eloByMatchType.put(GameType.GAPPLE, PlayerConfig.getGappleElo(paramPlayer));
-		eloByMatchType.put(GameType.NO_ENCHANT, PlayerConfig.getNoEnchantElo(paramPlayer));
+		eloByMatchType.put(Ladder.DEBUFF, PlayerConfig.getDebuffElo(paramPlayer));
+		eloByMatchType.put(Ladder.NO_DEBUFF, PlayerConfig.getNoDebuffElo(paramPlayer));
+		eloByMatchType.put(Ladder.BUILDUHC, PlayerConfig.getBuildUhcElo(paramPlayer));
+		eloByMatchType.put(Ladder.COMBO, PlayerConfig.getComboElo(paramPlayer));
+		eloByMatchType.put(Ladder.GAPPLE, PlayerConfig.getGappleElo(paramPlayer));
+		eloByMatchType.put(Ladder.NO_ENCHANT, PlayerConfig.getNoEnchantElo(paramPlayer));
 	}
 
 	public static PracticePlayer get(Player paramPlayer){
@@ -85,16 +85,16 @@ public class PracticePlayer {
 		isSpectator = spectator;
 	}
 
-	public int getElo(GameType gameType){
-		return eloByMatchType.get(gameType);
+	public int getElo(Ladder ladder){
+		return eloByMatchType.get(ladder);
 	}
 
-	public void addElo(GameType gameType, int elo){
-		eloByMatchType.put(gameType, eloByMatchType.get(gameType)+elo);
+	public void addElo(Ladder ladder, int elo){
+		eloByMatchType.put(ladder, eloByMatchType.get(ladder)+elo);
 	}
 
-	public void removeElo(GameType gameType, int elo){
-		eloByMatchType.put(gameType, eloByMatchType.get(gameType)-elo);
+	public void removeElo(Ladder ladder, int elo){
+		eloByMatchType.put(ladder, eloByMatchType.get(ladder)-elo);
 	}
 
 	public void sendLobbyItems(){

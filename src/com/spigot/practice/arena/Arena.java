@@ -1,46 +1,54 @@
 package com.spigot.practice.arena;
 
 import com.spigot.practice.Practice;
-import com.spigot.practice.config.ArenaConfig;
-import org.bukkit.Location;
+import org.bukkit.*;
 
 import java.util.HashMap;
 
 public class Arena {
 
     private String id;
+    private String name;
     private Location firstPlayerLocation;
     private Location secondPlayerLocation;
+    private Location arenaCenterLocation;
+    private Location spectateLocation;
     private boolean isUsed = false;
-    private boolean isTemporary;
+    private boolean canBuild = false;
+
     private static HashMap<String, Arena> arenaList = new HashMap<>();
 
-    public Arena(String arenaId, Location firstPlayerLocation, Location secondPlayerLocation){
+    public Arena(String arenaId){
         this.id = arenaId;
         arenaList.put(this.id, this);
-        this.firstPlayerLocation = firstPlayerLocation;
-        this.secondPlayerLocation = secondPlayerLocation;
     }
 
     public static Arena get(String arenaId){
         return arenaList.get(arenaId);
     }
 
-    public void createArena(){
-        ArenaConfig.saveArena(this.id);
-        Practice.log("Arena created | Id: " + this.id);
-        // setLocation(Iterables.getLast(arenaList.values()).getLocation().clone().add(100,0,0));
-        // paste worldedit en fonction du type
+    public void save(){
+        Practice.getInstance().getArenaConfig().saveArena(this.id);
     }
 
     public void remove(){
-        arenaList.remove(this.id);
-        Practice.log("Arena removed | Id: " + this.id);
-       // cut map with worldedit
+        Practice.getInstance().getArenaConfig().removeArena(this.id);
     }
 
     public String getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Location getCenterLocation() {
+        return arenaCenterLocation;
+    }
+
+    public Location getSpectateLocation() {
+        return spectateLocation;
     }
 
     public Location getFirstPlayerLocation() {
@@ -59,12 +67,20 @@ public class Arena {
         return isUsed;
     }
 
-    public boolean isTemporary() {
-        return isTemporary;
+    public boolean canBuild(){
+        return canBuild;
     }
 
     public void setUsed(boolean used) {
         isUsed = used;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public void setCanBuild(boolean canBuild) {
+        this.canBuild = canBuild;
     }
 
     public void setFirstPlayerLocation(Location firstPlayerLocation) {
@@ -73,6 +89,14 @@ public class Arena {
 
     public void setSecondPlayerLocation(Location secondPlayerLocation) {
         this.secondPlayerLocation = secondPlayerLocation;
+    }
+
+    public void setCenterLocation(Location arenaCenterLocation) {
+        this.arenaCenterLocation = arenaCenterLocation;
+    }
+
+    public void setSpectateLocation(Location spectateLocation) {
+        this.spectateLocation = spectateLocation;
     }
 }
 

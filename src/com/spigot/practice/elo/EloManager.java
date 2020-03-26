@@ -1,7 +1,7 @@
 package com.spigot.practice.elo;
 
 import com.spigot.practice.PracticePlayer;
-import com.spigot.practice.match.GameType;
+import com.spigot.practice.match.Ladder;
 
 public class EloManager {
 
@@ -9,10 +9,10 @@ public class EloManager {
 
     }
 
-    public void updateElo(PracticePlayer playerWinner, PracticePlayer playerLooser, GameType gameType){
-        double ratio = playerLooser.getElo(gameType) / playerWinner.getElo(gameType);
-        playerWinner.addElo(gameType, f(ratio));
-        playerLooser.removeElo(gameType, f(ratio));
+    public void updateElo(PracticePlayer playerWinner, PracticePlayer playerLooser, Ladder ladder){
+        double ratio = playerLooser.getElo(ladder) / playerWinner.getElo(ladder);
+        playerWinner.addElo(ladder, f(ratio));
+        playerLooser.removeElo(ladder, f(ratio));
         //sendMessage
     }
 

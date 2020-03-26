@@ -1,7 +1,7 @@
 package com.spigot.practice.inventory;
 
 import com.spigot.practice.PracticePlayer;
-import com.spigot.practice.match.GameType;
+import com.spigot.practice.match.Ladder;
 import com.spigot.practice.match.Ranking;
 import com.spigot.practice.queue.Queue;
 import fr.minuskube.inv.ClickableItem;
@@ -27,7 +27,7 @@ public class UnrankedInventory implements InventoryProvider{
             event.setCancelled(true);
             player.closeInventory();
 
-            Queue queue = new Queue(GameType.NO_DEBUFF);
+            Queue queue = new Queue(Ladder.NO_DEBUFF);
             queue.setRanking(Ranking.UNRANKED);
             queue.addPlayer(practicePlayer);
         });
@@ -36,7 +36,7 @@ public class UnrankedInventory implements InventoryProvider{
             event.setCancelled(true);
             player.closeInventory();
 
-            Queue queue = new Queue(GameType.DEBUFF);
+            Queue queue = new Queue(Ladder.DEBUFF);
             queue.setRanking(Ranking.UNRANKED);
             queue.addPlayer(practicePlayer);
         });

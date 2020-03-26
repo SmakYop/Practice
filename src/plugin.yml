@@ -9,4 +9,3 @@ commands:
      arena:
      party:
        description: Command to manage your party
-     match:
