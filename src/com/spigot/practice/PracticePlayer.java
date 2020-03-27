@@ -2,7 +2,6 @@ package com.spigot.practice;
 
 import com.spigot.practice.config.PlayerConfig;
 import com.spigot.practice.inventory.ItemsManager;
-import com.spigot.practice.match.Ladder;
 import com.spigot.practice.match.Match;
 import com.spigot.practice.queue.Queue;
 import com.spigot.practice.scoreboard.Scoreboard;
@@ -24,7 +23,7 @@ public class PracticePlayer {
 	private Match match;
 
 	private static HashMap<Player, PracticePlayer> practicePlayers = new HashMap<>();
-	private static HashMap<Ladder, Integer> eloByMatchType = new HashMap<>();
+	//private static HashMap<LadderManager, Integer> eloByMatchType = new HashMap<>();
 
 	public PracticePlayer(Player paramPlayer){
 		if(!PlayerConfig.exists(paramPlayer)) PlayerConfig.registerPlayer(paramPlayer);
@@ -36,12 +35,12 @@ public class PracticePlayer {
 		this.globalElo = PlayerConfig.getGlobalElo(paramPlayer);
 		practicePlayers.put(paramPlayer, this);
 
-		eloByMatchType.put(Ladder.DEBUFF, PlayerConfig.getDebuffElo(paramPlayer));
-		eloByMatchType.put(Ladder.NO_DEBUFF, PlayerConfig.getNoDebuffElo(paramPlayer));
-		eloByMatchType.put(Ladder.BUILDUHC, PlayerConfig.getBuildUhcElo(paramPlayer));
-		eloByMatchType.put(Ladder.COMBO, PlayerConfig.getComboElo(paramPlayer));
-		eloByMatchType.put(Ladder.GAPPLE, PlayerConfig.getGappleElo(paramPlayer));
-		eloByMatchType.put(Ladder.NO_ENCHANT, PlayerConfig.getNoEnchantElo(paramPlayer));
+		/*eloByMatchType.put(LadderManager.DEBUFF, PlayerConfig.getDebuffElo(paramPlayer));
+		eloByMatchType.put(LadderManager.NO_DEBUFF, PlayerConfig.getNoDebuffElo(paramPlayer));
+		eloByMatchType.put(LadderManager.BUILDUHC, PlayerConfig.getBuildUhcElo(paramPlayer));
+		eloByMatchType.put(LadderManager.COMBO, PlayerConfig.getComboElo(paramPlayer));
+		eloByMatchType.put(LadderManager.GAPPLE, PlayerConfig.getGappleElo(paramPlayer));
+		eloByMatchType.put(LadderManager.NO_ENCHANT, PlayerConfig.getNoEnchantElo(paramPlayer));*/
 	}
 
 	public static PracticePlayer get(Player paramPlayer){
@@ -100,17 +99,17 @@ public class PracticePlayer {
 		this.match = null;
 	}
 
-	public int getElo(Ladder ladder){
-		return eloByMatchType.get(ladder);
+	/*public int getElo(LadderManager ladderManager){
+		return eloByMatchType.get(ladderManager);
 	}
 
-	public void addElo(Ladder ladder, int elo){
-		eloByMatchType.put(ladder, eloByMatchType.get(ladder)+elo);
+	public void addElo(LadderManager ladderManager, int elo){
+		eloByMatchType.put(ladderManager, eloByMatchType.get(ladderManager)+elo);
 	}
 
-	public void removeElo(Ladder ladder, int elo){
-		eloByMatchType.put(ladder, eloByMatchType.get(ladder)-elo);
-	}
+	public void removeElo(LadderManager ladderManager, int elo){
+		eloByMatchType.put(ladderManager, eloByMatchType.get(ladderManager)-elo);
+	}*/
 
 	public void sendLobbyItems(){
 		ItemsManager unranked = new ItemsManager(Material.IRON_SWORD, "§eUnranked", new String[]{"§7Right-click to play unranked matches"});

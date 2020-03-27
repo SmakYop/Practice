@@ -1,0 +1,45 @@
+#Default ladder configuration.
+#You can add or remove ladders.
+ladder:
+  '1':
+    name: 'NoDebuff'
+    ranked: true
+    build: false
+    item:
+    item_slot: 0
+    kit: 'pots'
+  '2':
+    name: 'Debuff'
+    ranked: true
+    build: false
+    item:
+    item_slot: 1
+    kit: 'pots'
+  '3':
+    name: 'BuildUHC'
+    ranked: true
+    build: true
+    item:
+    item_slot: 2
+    kit: 'uhc'
+  '4':
+    name: 'Combo'
+    ranked: true
+    build: false
+    item:
+    item_slot: 3
+    kit: 'combo'
+  '5':
+    name: 'Gapple'
+    ranked: true
+    build: false
+    item:
+    item_slot: 4
+    kit: 'gapple'
+  '6':
+    name: 'NoEnchant'
+    ranked: true
+    build: false
+    item:
+    item_slot: 5
+    kit: 'noenchant'

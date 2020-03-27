@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerConnection implements Listener{
 
@@ -21,5 +22,11 @@ public class PlayerConnection implements Listener{
 
 		practicePlayer.sendLobbyItems();
 		practicePlayer.sendLobbyScoreboard();
+	}
+
+	@EventHandler
+	public void onPlayerQuit(PlayerQuitEvent event){
+		if(PracticePlayer.get(event.getPlayer()).getQueue() != null)
+			PracticePlayer.get(event.getPlayer()).getQueue().removePlayer(PracticePlayer.get(event.getPlayer()));
 	}
 }

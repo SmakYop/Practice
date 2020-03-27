@@ -8,7 +8,6 @@ public class PracticeConfig {
 
 	public static String PREFIX = Practice.getInstance().getConfig().getString("General.prefix").replace('&', '§');
 	public static int START_PLAYER_ELO = Practice.getInstance().getConfig().getInt("General.start_player_elo");
-	public static int DEFAULT_ARENA_NUMBER = Practice.getInstance().getConfig().getInt("Arena.number_default_arena");
 	public static Location SPAWN_LOCATION = new Location(Bukkit.getWorld(Practice.getInstance().getConfig().getString("Spawn.world")), Practice.getInstance().getConfig().getDouble("Spawn.x"), Practice.getInstance().getConfig().getDouble("Spawn.y"), Practice.getInstance().getConfig().getDouble("Spawn.z"));
 	public static String ARENA_WORLD_NAME = "arena";
 

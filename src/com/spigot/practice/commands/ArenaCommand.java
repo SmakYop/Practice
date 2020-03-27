@@ -1,8 +1,10 @@
 package com.spigot.practice.commands;
 
 import com.spigot.practice.Practice;
+import com.spigot.practice.PracticePlayer;
 import com.spigot.practice.arena.Arena;
 import com.spigot.practice.config.PracticeConfig;
+import com.spigot.practice.queue.Queue;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,6 +18,8 @@ public class ArenaCommand implements CommandExecutor{
 
         Player player = (Player) commandSender;
         if(!(player.hasPermission(PracticeConfig.PERMISSION_ARENA) || player.isOp())) return true;
+
+        if(PracticePlayer.get(player).isInQueue()) player.sendMessage("§cCan't do this in queue.");
 
         if(args.length == 0){
             player.sendMessage("§7---------------- §eArena Commands §7----------------");

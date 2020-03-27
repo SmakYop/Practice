@@ -3,7 +3,7 @@ package com.spigot.practice.queue;
 import com.spigot.practice.Practice;
 import com.spigot.practice.PracticePlayer;
 import com.spigot.practice.arena.Arena;
-import com.spigot.practice.match.Ladder;
+import com.spigot.practice.ladder.Ladder;
 import com.spigot.practice.match.Match;
 import com.spigot.practice.match.Ranking;
 
@@ -29,12 +29,13 @@ public abstract class Queue {
             return;
         }
         Match match = new Match(firstPlayer, secondPlayer, Practice.getInstance().getArenaManager().selectRandomPlayableArena(ladder.canBuild()), ladder, ranking);
-        match.createMatch();
 
         firstPlayer.setMatch(match); secondPlayer.setMatch(match);
         firstPlayer.sendDuelScoreboard(); secondPlayer.sendDuelScoreboard();
         firstPlayer.removeQueue(); secondPlayer.removeQueue();
 
         removePlayer(firstPlayer); removePlayer(secondPlayer);
+
+        match.createMatch();
     }
 }

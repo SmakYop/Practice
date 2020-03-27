@@ -1,7 +1,7 @@
 package com.spigot.practice.queue;
 
 import com.spigot.practice.PracticePlayer;
-import com.spigot.practice.match.Ladder;
+import com.spigot.practice.ladder.Ladder;
 import com.spigot.practice.match.Ranking;
 
 import java.util.ArrayList;

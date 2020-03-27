@@ -3,6 +3,7 @@ package com.spigot.practice.match;
 import com.spigot.practice.PracticePlayer;
 import com.spigot.practice.arena.Arena;
 import com.spigot.practice.config.PracticeConfig;
+import com.spigot.practice.ladder.Ladder;
 
 public class Match {
 
@@ -33,7 +34,6 @@ public class Match {
     }
 
     private void startMatch(){
-        broadcastMessage(PracticeConfig.PREFIX + " §eArena: §c" + this.arena.getName() + " §7(ID: #" + this.arena.getId() + ")");
         broadcastMessage(PracticeConfig.PREFIX + " §eYour duel is going to start in §c10 §eseconds...");
         this.firstPlayer.getPlayer().getInventory().clear();
         this.secondPlayer.getPlayer().getInventory().clear();
