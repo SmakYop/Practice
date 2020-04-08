@@ -42,7 +42,21 @@ public class UnrankedQueue extends Queue {
 
     @Override
     public void addPlayer(PracticePlayer practicePlayer) {
+        Queue queue = practicePlayer.getQueue();
+        if(queue != null && queue.getRanking() == this.ranking && queue.getLadder() == this.ladder){
+            practicePlayer.getPlayer().sendMessage("§cYou are already in this queue.");
+            return;
+        }
+        if(queue != null && queue.getRanking() != this.ranking){
+            queue.removePlayer(practicePlayer);
+        }
+        if(queue != null && queue.getRanking() == this.ranking && queue.getLadder() != this.ladder){
+            queue.removePlayer(practicePlayer);
+        }
+
         this.players.add(practicePlayer);
+        practicePlayer.setQueue(UnrankedQueue.getQueue(this.ladder));
+        practicePlayer.getScoreboard().update();
         practicePlayer.getPlayer().sendMessage("§eSuccessfully added to the queue! Mode: §6" + this.ladder.getName() + " §e| §6" + this.ranking.getName());
         practicePlayer.getPlayer().sendMessage("§ePosition: §7#" + players.size());
 

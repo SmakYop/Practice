@@ -28,10 +28,10 @@ public abstract class Queue {
             firstPlayer.getPlayer().sendMessage("§cNo arena is available."); secondPlayer.getPlayer().sendMessage("§cNo arena is available.");
             return;
         }
-        Match match = new Match(firstPlayer, secondPlayer, Practice.getInstance().getArenaManager().selectRandomPlayableArena(ladder.canBuild()), ladder, ranking);
+        Match match = new Match(new PracticePlayer[]{firstPlayer, secondPlayer}, Practice.getInstance().getArenaManager().selectRandomPlayableArena(ladder.canBuild()), ladder, ranking);
 
         firstPlayer.setMatch(match); secondPlayer.setMatch(match);
-        firstPlayer.sendDuelScoreboard(); secondPlayer.sendDuelScoreboard();
+        firstPlayer.getScoreboard().sendDuelScoreboard(); secondPlayer.getScoreboard().sendDuelScoreboard();
         firstPlayer.removeQueue(); secondPlayer.removeQueue();
 
         removePlayer(firstPlayer); removePlayer(secondPlayer);

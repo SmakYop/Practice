@@ -19,7 +19,7 @@ public class LadderManager {
             ladder.setBuild(configuration.getBoolean("ladder." + i + ".build"));
             ladder.setKit(Kit.getKits(configuration.getString("ladder." + i + ".kit")));
             ladder.setItemSlot(configuration.getInt("ladder." + i + ".item_slot"));
-            //Load l'item dans l'inventaire
+
         }
     }
 

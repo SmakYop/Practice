@@ -24,14 +24,13 @@ public class UnrankedInventory implements InventoryProvider{
         PracticePlayer practicePlayer = PracticePlayer.get(player);
         for(int i=1; i<= Practice.getInstance().getLadderManager().getLadderNumber(); i++){
             Ladder ladder = Practice.getInstance().getLadderManager().getLadder(i);
-            ClickableItem clickableItem = ClickableItem.of(new ItemsManager(new ItemStack(373, 1, (byte) 16421).getType(), "§6" + ladder.getName(),
+            ClickableItem clickableItem = ClickableItem.of(new ItemsManager(new ItemStack(373, 1, (byte)16421).getType(), "§6" + ladder.getName(),
                     new String[] {"§ePlaying: ","§eQueued: ","§7Click to queue for §eUnranked " + ladder.getName()}).toItemStack(), event -> {
                 event.setCancelled(true);
                 practicePlayer.getPlayer().closeInventory();
 
                 Queue queue = UnrankedQueue.getQueue(ladder);
                 queue.addPlayer(practicePlayer);
-                practicePlayer.setQueue(queue);
 
             });
 

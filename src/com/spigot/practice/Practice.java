@@ -51,7 +51,7 @@ public class Practice extends JavaPlugin{
 
 		for(Ladder ladder : Ladder.getLadders().values()){
 			new UnrankedQueue(ladder);
-			new RankedQueue(ladder);
+			if(ladder.isRanked()) new RankedQueue(ladder);
 		}
 	}
 

@@ -31,7 +31,6 @@ public class RankedInventory implements InventoryProvider{
 
                 Queue queue = RankedQueue.getQueue(ladder);
                 queue.addPlayer(practicePlayer);
-                practicePlayer.setQueue(queue);
 
             });
 
